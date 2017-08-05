@@ -21,5 +21,20 @@ struct student {
 };
 
 void * scoresDescendingSort(struct student *students, int len) {
-	return NULL;
+	if (students == NULL || len < 1)
+		return NULL;
+	else if (len == 1) {
+		return 0;
+	}
+	else {
+			for (int i = 0; i < len - 1; i++) {
+				for (int j = i + 1; j < len; j++) {
+					if (students[i].score < students[j].score) {
+						struct student temp = students[i];
+						students[i] = students[j];
+						students[j] = temp;
+				}
+			}
+		}
+	}
 }
