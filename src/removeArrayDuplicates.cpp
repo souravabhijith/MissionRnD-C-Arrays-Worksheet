@@ -15,8 +15,42 @@ NOTES: Don't create new array, try to change the input array.
 
 #include <stdio.h>
 
+void sortingArray(int *Arr, int len){
+	for (int i = 0; i < len - 1; i++) {
+		for (int j = i + 1; j < len; j++) {
+			if (Arr[i] > Arr[j]) {
+				int temp = Arr[i];
+				Arr[i] = Arr[j];
+				Arr[j] = temp;
+			}
+		}
+	}
+}
+
+void removeIndices(int *Arr, int *len, int p)
+{
+	int i;
+	for (i = p; i<*len - 1; i++)
+		Arr[i] = Arr[i + 1];
+	*len -= 1;
+}
+
+
 int removeArrayDuplicates(int *Arr, int len)
 {
 	
-	return -1;
+	if (Arr == NULL || len < 0)
+		return -1;
+	else {
+		sortingArray(Arr, len);
+		for (int i = 0; i < len - 1; i++){
+			for (int j = i + 1; j < len;){
+				if (Arr[i] == Arr[j])
+					removeIndices(Arr, &len, j);
+				else
+					j++;
+			}
+		}
+		return len;
+	}
 }
